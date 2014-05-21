@@ -1,0 +1,74 @@
+Module 2: Ruby on Rails
+
+Rails - software framework for building web apps.
+	Built using Ruby
+	Open source - MIT license
+	Full stack, back-end data store to front-end presentation
+	Released in 2004, rapidly evolving
+	
+	Twitter, Hulu, GitHub all build w/ rails
+	
+	Ruby gem (package ruby app)
+	Auto testing, code generators
+	Suite of tools
+		Rake - RubyMAKE
+	WEBrick - web server
+	SQLite - built in - simple DB engine
+	Rack Middlewware - standardized interface
+	
+Model-View-Controller (MVC)
+	6-tier architecture
+	Helps organize the separate logics
+	
+Rails criticisms
+	It doesn't scale - high profile issues at Twitter
+	It's magic - don't know what's going on under the hood
+	Part of natural progression of computing
+		Bits -> Assembly -> High-level languages -> Object-oriented programming
+			-> Frameworks
+		Tradeoff: Productivity for deep understanding
+	
+Lecture 2: First Rails App
+
+rails new my_app
+	new creates a number of directories, runs bundle install
+	bundle install: ensures you have the right gems for your app
+		- should run bundle install for every app created
+	bundle check: makes sure you have the correct gems
+	rails server: starts the server to run your web app
+		- 3000 is default port
+		
+Address 0.0.0.0:3000
+	WEBrick server is running on machine and is listening on this port
+	Equivalent to localhost:3000
+		
+Directory
+	RAILS.root "my_app" - name used when running rails new *
+	app: Models, Views, and Controllers
+	bin: helper scripts: bundle, rails, rake
+	config: app, database, and route configuration
+	db: database schema and migrations
+	Gemfile: specifies the requried gems
+	log: Application logging directory
+	public: Webroot of the application ****
+		- Error files, e.g. 404
+	test: Agile development testing
+	
+Lecture 3
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+	
