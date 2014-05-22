@@ -24,8 +24,8 @@ Rails criticisms
 	It doesn't scale - high profile issues at Twitter
 	It's magic - don't know what's going on under the hood
 	Part of natural progression of computing
-		Bits -> Assembly -> High-level languages -> Object-oriented programming
-			-> Frameworks
+		Bits -> Assembly -> High-level languages 
+			-> Object-oriented programming -> Frameworks
 		Tradeoff: Productivity for deep understanding
 	
 Lecture 2: First Rails App
@@ -57,12 +57,123 @@ Directory
 Lecture 3
 =========
 
+Lecture 4 Rails Philosophy
+=========
+Convention over Configuration: Common aspects of a web app are 
+	preconfigured, so use them, rather than fight them
+	Only specify unconventional aspects of the app
+Don't Repeat Yourself (DRY): Every piece of info should have a single,
+	unambiguous, authoritative representation w/in a system
+	Duplication leads to logical contradictions and makes things 
+	difficult
+	Don't want to have multiple places to change data
+Agile Development: iterative and incremental development,
+	requirements and code evolve with minimal planning
+	
+Convention over Configuration
+	* Massive # of conventions built into Rails
+	* Full web stack is pre-wired
+	* Code generators follow naming conventions
+		- MVC generator "post"
+			* Class called Post for model, corresponding table in db 
+				called posts
+			* RESTful controller called posts_controller
+				- Crud operations
+			* posts view, HTML files that can be used to render results
+			* Test fixtures automatically generated
+			
+DRY
+	* ActiveRecords: once a model is specified, you don't need to 
+		specify column names - they are determined from the model
+		- When done right, modification to a system element does not 
+			change any other logically-unrelated element
+		- Code generators, automatic build
+		- Avoid copy and paste operations
+		- Easier to maintain large software systems
+		
+Agile Development
+	* Working software is primary measure of progress
+	* Working app is available immediately
+	* In development mode, no recompile, deploy, restart cycles
+		No need to stop the server
+	* Simple tools to generate code quickly
+	* Testing is built into Rails
+	* Extreme programming
+		- TDD: design tests first, build code to satisfy tests
+		- Behavior-driven development: Define behavior you want to see,
+			design code to satisfy behavior
+			- natural lang for nonprogrammers
+			Desired code, discuss with stakeholders
+			RSpec and Cucumber
+			
+Lecture 5 - Version Control
+===========================
 
+Rails has version control capabilities
+
+Version control/Revision control/Source code control:
+	Tracking and providing control over changes made to source code
+	- Managing software versions has existed forever
+	- Different pieces of code from different developers
+Centralized version control
+	Multiple developers
+	If Developer 1 checks out file A, developer cannot check out 
+		file A, but can check out file B
+Distributed Version Control
+	Team-based, no centralized repository
+	Team members check out entire repository
+	No lock to repository
+	What about putting it back together when checking in?
+	Up to owner of repo to merge different version together
+	Merge tools help with this
+	
+Lecture 6: Git
+==============
+
+Git is popular open source distr version control system created in 2005
+	by Linux devel comm
+	Used extensively in Rails commun
+	Git provides means for comparing the differences between various
+		versions of a project (project snapshots) and for merging them
+		accordingly
+	Think of as a tree:
+		- Main development branch == master
+		- New version smay be created along master branch, or new branches can be
+			created off of it
+		- Can be merged back into master
+	Tracks files in 3 locations
+		- Working directory - where you edit files
+		- Staging area
+		- Git repository
 		
+		- Files in working directory can be 
+			* Tracked: files that were saved to Git repo by last commit
+			* Untracked: All other files in working directory
 		
-		
-		
-		
+		- Tracked files can be
+			* Modified
+			* Unmodified
+			* Staged
+
+working directory == add . ==> staging area
+	puts everything in directory to staging area
+staging area == commit ==> puts in local git reposiory
+working directory = commit -a => skip staging area, push directly
+working directory <==== checkout <branch> ===== local git repo
+merge <branch>: merges into current branch in working directory
+
+git init
+vim .gitignore
+
+remote git repository: Want to push changes for others to grab and use
+	push <remote> <branch>
+	To retrieve a remote repo, issue "fetch" command, and then checkout
+		a particular branch
+	Alternatively, issue pull <remote>, fetches, checks out
+		most recent branch and makes it master
+		clone <remote>: Creates repo initially on system, then you can 
+			use pull commands to pull remote git repo onto machine
+
 		
 		
 		
