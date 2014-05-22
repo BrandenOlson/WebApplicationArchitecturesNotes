@@ -1,2 +1,85 @@
 Module 3: Database Interactions
 ===============================
+
+Overview
+	* Relational databases
+	* DBs in Rails
+	* Active Record design pattern
+	* The blog app - iteration 2 (Associations)
+	* Iteration 3 (Validations)
+	
+Lecture 1: Relational Databases
+===============================
+
+Data tier for nTier model
+Relational databases are SQL (Will not cover NOSQL)
+Relational DBS are most common way to persistently store data in web apps
+Relational DB is used to store a collection of relations
+	- Each row in a table (entity) corresponds to one record, 
+	- Columns correspond to fields (attributes) of record
+	
+	- id field? Forms relationships with other tables.
+		* "Primary key" of table - key you need for particular row
+	- Normalize: Create two tables, one for people, one for phones
+		- each record in phone table will hold id of a person
+		- in phone table, person_id is refered to as foreign key
+		- given person's id we can serch the phone table 
+		- Done using structured query languages (SQL)
+		- Rails lets us bybass with Active Records
+		
+Example: Normalization
+
+Structure/organization of tables in a DB is refereed to as a shema
+Entity-relationship model is common way of abstractly capturing a database shema
+
+MySQL Workbench (download) *********
+	- Create EER diagrams (Enhanced Entity-Relationship diagrams)
+	- Create links between tables
+	- Good tool to visually generate a schema
+
+Example: Can further normalize by creating an address table
+	- However, this is many-to-one: Multiple people can have same address
+	- You can imagine a situation where one person also has many addresses
+	- Thus, people and addresses have a many-to-many relationship
+	- This is done by creating a "join table": joins the people and addresses tables
+		* In example, called addresses_people: only stores foreign keys
+
+Lecture 2: Databases in Rails
+=============================
+
+Data access tier part of the nTier model
+Each time we ran scaffold, Rails created a DB migration and put in db/migrate directory
+rake command runs these migrations, creates schema
+migrations can also be used to undo work of previous migrations, timestamped, executed in order
+
+Rails environments
+	- Development, Test, Production
+	
+	rails server: rails runs in devel env.
+	rails server -e production: run in production env.
+		- If you make change to source, it is not reflected in app
+		- Rails optimizes delivery of assets (CSS, HTML, JavaScript, etc.)
+	
+Rails databases
+	- During devel, you are the only one accessing DB
+	- Rails automatically sets up devel env to use SQLite
+	- SQLite is not a production grade DB
+	- DB needs to handle 1000's of hits
+	- Popular prod DB include; PostgresQL and MySQL
+	- DBs that Rails will use is in db/database.yml
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
