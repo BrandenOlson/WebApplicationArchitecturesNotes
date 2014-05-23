@@ -13,7 +13,8 @@ Lecture 1: Relational Databases
 
 Data tier for nTier model
 Relational databases are SQL (Will not cover NOSQL)
-Relational DBS are most common way to persistently store data in web apps
+Relational DBS are most common way to persistently store data in web 
+	apps
 Relational DB is used to store a collection of relations
 	- Each row in a table (entity) corresponds to one record, 
 	- Columns correspond to fields (attributes) of record
@@ -30,7 +31,8 @@ Relational DB is used to store a collection of relations
 Example: Normalization
 
 Structure/organization of tables in a DB is refereed to as a shema
-Entity-relationship model is common way of abstractly capturing a database shema
+Entity-relationship model is common way of abstractly capturing a 
+	database shema
 
 MySQL Workbench (download) *********
 	- Create EER diagrams (Enhanced Entity-Relationship diagrams)
@@ -38,19 +40,24 @@ MySQL Workbench (download) *********
 	- Good tool to visually generate a schema
 
 Example: Can further normalize by creating an address table
-	- However, this is many-to-one: Multiple people can have same address
-	- You can imagine a situation where one person also has many addresses
+	- However, this is many-to-one: Multiple people can have same 
+		address
+	- You can imagine a situation where one person also has many 
+		addresses
 	- Thus, people and addresses have a many-to-many relationship
-	- This is done by creating a "join table": joins the people and addresses tables
+	- This is done by creating a "join table": joins the people and 
+		addresses tables
 		* In example, called addresses_people: only stores foreign keys
 
 Lecture 2: Databases in Rails
 =============================
 
 Data access tier part of the nTier model
-Each time we ran scaffold, Rails created a DB migration and put in db/migrate directory
+Each time we ran scaffold, Rails created a DB migration and put in 
+	db/migrate directory
 rake command runs these migrations, creates schema
-migrations can also be used to undo work of previous migrations, timestamped, executed in order
+migrations can also be used to undo work of previous migrations, 
+	timestamped, executed in order
 
 Rails environments
 	- Development, Test, Production
@@ -58,7 +65,8 @@ Rails environments
 	rails server: rails runs in devel env.
 	rails server -e production: run in production env.
 		- If you make change to source, it is not reflected in app
-		- Rails optimizes delivery of assets (CSS, HTML, JavaScript, etc.)
+		- Rails optimizes delivery of assets 
+			* (CSS, HTML, JavaScript, etc.)
 	
 Rails databases
 	- During devel, you are the only one accessing DB
@@ -75,7 +83,8 @@ Rails is based on MVC
 ActiveRecord links together business logic tier and data access tier
 Created by Martin Fowler
 Used in Ruby to persist data, to be recalled for later use
-Used to perform CRUD operations w/out worrying about specific DB platform
+Used to perform CRUD operations w/out worrying about specific DB 
+	platform
 	e.g. SQLite, MySQL
 	
 Most software apps are OO
@@ -88,41 +97,119 @@ Classes -> Tables
 Objects -> Records (rows)
 Attributes -> Record values (columns)
 
-Active Record design pattern is provided in a Ruby module called ActiveRecord
+Active Record design pattern is provided in a Ruby module called 
+	ActiveRecord
 Allows you to
 	- Establish connection to DB
 	- Create DB tables
-	- Specify associations between tables that correspond to associations
+	- Specify associations between tables that correspond to 
+		associations
 		between Ruby classes
 	- Establish ORM between Ruby classes and underlying database
 	- Perform CRUD ops on ActiveRecord objects
 	- Built into Rails
 		* Convention over configuration
 		
-ActiveRecord::Base.establish_connection uses info in ./config/database.yml to connect an app to DB
+ActiveRecord::Base.establish_connection uses info in 
+	./config/database.yml to connect an app to DB
 ActiveRecord::Migration used to incrementally evolve your DB over time
-ActiveRecord::Schema.define in ./db/schema.rb, created by inspecting DB and expressing it in a portable DSL.
+ActiveRecord::Schema.define in ./db/schema.rb, created by inspecting DB 
+	and expressing it in a portable DSL.
 	* Can be loaded into any DB
 
 ActiveRecord Module
 	- Create a new class, called Post
 		* assumes DB table will exist and is called posts
-	- Base class in ActiveRecord inspects posts in DB and determines its fields,
+	- Base class in ActiveRecord inspects posts in DB and determines 
+		its fields,
 		and automatically adds member variables/accessors
 	- Query interface is also provided - you don't need to use SQL
-		* Post.all, Post.first, Post.find_by(1), Post.find_by_title("My First Post")
+		* Post.all, Post.first, Post.find_by(1), 
+			Post.find_by_title("My First Post")
 	
-IRB is an interpreter that is provided with Ruby, can be used for real-time debugging
+IRB is an interpreter that is provided with Ruby, can be used for 
+	real-time debugging
 	irb in terminal
 	
 Rails console allows you to interact w/ Rails app through IRB
 	rails console in root directory
 
+Lecture 4 : Associations
+========================
 
+We need to ensure that every comment created is linked to a post
 
+We made this connection in the DB because in comment, we have a post_id stored (foreign key)
+We need to add associations to the models. Each post needs to know comments it has,
+	each comment needs to know which post it belongs to.
+	Many-to-one relationship between comments and posts
+	
+ActiveRecord module contains a set of class methods to ty objects toeghether
+	
+Relationship	Model w/ no foreign key		Model with foreign_key
+------------------------------------------------------------------
+one-to-one		has_one						belongs_to
+many-to-one		has_many					belongs_to
+many-to-many	has_and_belongs_to_many		*
+*foreign keys for each model are stored in a join table
 
+Want to see comments under the post
+In config/routes.rb
+	* resources :comments, resources :posts
+		- Creates all routes for index, edit, show, etc.
+	* To nest commments,
+		resources :posts do
+			resources :comments
+		end
+		
+Lecture 5: Validations
+======================
 
-
+Data validation is the process of ensuring your web app operates on clean, correct, useful data
+Ex: Ensure user provides valid email address, etc.
+Ex: Ensure inputs are same, e.g. phone numbers
+Ex: Ensure business rules are not being violated
+Most common web app security weakness is failure to validate client-side input
+	* SQL injection, cross-site scripting, buffer overflow attacks
+	* SQL injection: entering SQL code into a form, code gets stored and executed in DB
+	* Buffer overflow: providing long input to overflow buffer and execute things in memory
+	
+Data validations in web apps
+	Client-side: JavaScript, HTML5
+	Controller-level or model-level
+	Database-stored procedure
+	
+Client-side: Involves checking that HTML forms are filled out correctly
+	JavaScript, running in browser, has traditionally been us3ed.
+	HTML5 now has more specific input types that can be checked, along with required attribute
+		* Not everyone has JavaScript enabled in browser
+	Works best when combined with server-side validations
+Server-side: checks made after an HTML form has been submitted
+	- Database (stored procedures) - database-dependent, so not portable. 
+	- Controller-level: You don't want to put too much logic in the controller
+	- Model-level - A good way to ensure that only valid data is stored in your databse, in a DB agnostic way
+	
+ActiveRecord Callbacks
+	Objects in an OO system have lifecycles: first created, can later be updated and destroyed
+	ActiveRecord objects have methods that can be called in order to ensure their integrity at various stages
+	Ex: Don't create a new user object if user already exists in DB
+	Ex: Ensure that all object's attributes are valid before saving to DB
+	Ex: When destroying object, destroy all of its dependencies
+	
+	Callbacks are methods that get called at certain points in an ActiveRecord object's lifecycle
+		* Hooks into the lifecycle, allowing to trigger logic before/after state of object changes
+		
+ActiveRecord Validations
+	Are a type of ActiveRecord callback that can be used to ensure only valid data is stored
+	Create, save and update methods trigger validations, and will only allow a valid AR object
+	Defined in models
+	
+	Ex:
+		class Person < ActiveRecord::Base
+			validates_presence_of :name
+			validates_numericality_of :age, :only_integer => true
+			validates_confirmation_of :email
+			validates_length_of :password, :in => 8..20
 
 
 
