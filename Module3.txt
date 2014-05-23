@@ -68,6 +68,64 @@ Rails databases
 	- Popular prod DB include; PostgresQL and MySQL
 	- DBs that Rails will use is in db/database.yml
 	
+Lecture 3: Active Record Design Pattern
+=======================================
+
+Rails is based on MVC
+ActiveRecord links together business logic tier and data access tier
+Created by Martin Fowler
+Used in Ruby to persist data, to be recalled for later use
+Used to perform CRUD operations w/out worrying about specific DB platform
+	e.g. SQLite, MySQL
+	
+Most software apps are OO
+Big problem: Relational DBs are not
+ORM: object-relational mapping given by Active Record
+Converts object into constructs that can be stored in DB
+Creates "virtual object database"
+
+Classes -> Tables
+Objects -> Records (rows)
+Attributes -> Record values (columns)
+
+Active Record design pattern is provided in a Ruby module called ActiveRecord
+Allows you to
+	- Establish connection to DB
+	- Create DB tables
+	- Specify associations between tables that correspond to associations
+		between Ruby classes
+	- Establish ORM between Ruby classes and underlying database
+	- Perform CRUD ops on ActiveRecord objects
+	- Built into Rails
+		* Convention over configuration
+		
+ActiveRecord::Base.establish_connection uses info in ./config/database.yml to connect an app to DB
+ActiveRecord::Migration used to incrementally evolve your DB over time
+ActiveRecord::Schema.define in ./db/schema.rb, created by inspecting DB and expressing it in a portable DSL.
+	* Can be loaded into any DB
+
+ActiveRecord Module
+	- Create a new class, called Post
+		* assumes DB table will exist and is called posts
+	- Base class in ActiveRecord inspects posts in DB and determines its fields,
+		and automatically adds member variables/accessors
+	- Query interface is also provided - you don't need to use SQL
+		* Post.all, Post.first, Post.find_by(1), Post.find_by_title("My First Post")
+	
+IRB is an interpreter that is provided with Ruby, can be used for real-time debugging
+	irb in terminal
+	
+Rails console allows you to interact w/ Rails app through IRB
+	rails console in root directory
+
+
+
+
+
+
+
+
+
 
 
 
