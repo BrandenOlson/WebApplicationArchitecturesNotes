@@ -28,7 +28,7 @@ History: Yukihiro Matsumoto (Matz) created Ruby in mid 90's
 	* www.ruby-lang.org, among other tutorials and references
 	
 Ruby gems is a package management system. gem list
-Rails is a Ruby gem
+Rails is a Ruby g
 
 The Ruby Interpreter
 	ruby -e ' code goes here '
@@ -63,12 +63,70 @@ Language Features
 		- Functional programming : Computation proceeds via the eval of 
 		    functions that depend only on their input, not the program state
 
+Lecture 2 : Classes and Inheritance
+===================================
 
+Classes are defined using keyword class, name must begin with capital,
+	and CamelCase is the convention
+	
+	No type information
+	Cannot access instance variables
+	
+Methods
+	* Notice that there is no return value specified in the methods above
+	* Implicit return values : The value of the last expression executed in a method
+	* The return statement still exists if desired
+	* When invoking a method, parentheses are optional
+	
+Class methods
+	* Class methods are created in the same way as normal methods, except prefixed with keyword self
+		- class MyClass
+			def self.cls_method
+				"MyClass type"
+			end
+		  end
+	* MyClass.cls_method # => "MyClass type"
+	
+Methods
+	* Last character of a method name is often used to indicate its behavior
+		- Ends with ? => return value is boolean
+		- Endw with ! => method changes the state of the object
+			* Usually a !-version and a non-!-version
+		- keyword self can be us3ed inside an object's methods to refer to the current object
+		
+Inheritance, Mixins, and Extending Classes
+	* Only single inheritance is supported
+	* Mixin capability associated w/ modules gives you multiple inheritance
+	* Classes are never closed - you can always add methods to an existing classes
+		- Built-in and self-written
+		- class Fixnum
+		    def previous
 
-
-
-
-
+Specifying Access
+	* public / private /protected
+	* Different than in C++ and Java
+		- public : no access control, can be called by anyone
+		- protected : can be invoked only by objects of the defining class and subclasses
+		- private : can only be called in context of current object, w/out an object reference on the LHS
+			* receiver of a private method is always self
+	* By default, every method in class is public, every instance variable is protected
+	
+Accessors
+	class MyClass
+		attr_accessor :boo
+	end
+	* Can also just use attr_reader, attr_writer
+	
+Inheritance
+	Syntax is class NewClass < SuperClass
+	
+	Initialize method is always private, used to create constructer that is invoked by calling new on a class name
+	Can create module with its own namespace with keyword module
+		* Include a number of classes within it
+	Can include a module within another program with keyword require:
+		- require 'module_name'
+	Within a class, keyword include to mixin a module
+		* Makes all methods defined in that module a part of the class that includes the module
 
 
 
