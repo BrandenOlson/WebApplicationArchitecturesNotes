@@ -1,0 +1,86 @@
+Module 4: The Ruby Programming Langauge
+=======================================
+
+Just enough of an intro to understand Rails apps
+Background
+Classes and Inheritance
+Objects and Variables
+Strings, RegEx, Symbols
+Expressions, Control Structures
+Collections, Blocks, and Iterators
+
+Lecture 1 : Background
+======================
+
+Rails was built using the Ruby PL
+Ruby code shows up in models, views, and controllers
+
+History: Yukihiro Matsumoto (Matz) created Ruby in mid 90's
+	* Scripting lang more powerful than Perl,
+		more OO than Python
+	* Focus on the programmer, rather than the machine
+	* Maximize programmer proficiency
+	* Ruby is designed to make programmers happy
+	* Principle of Least Astonishment: language should behave to 
+	   minimize confusion of experienced programmers
+	* Object-oriented interpreted scripting language: intuitive, 
+	   flexible, and extensible
+	* www.ruby-lang.org, among other tutorials and references
+	
+Ruby gems is a package management system. gem list
+Rails is a Ruby gem
+
+The Ruby Interpreter
+	ruby -e ' code goes here '
+	-e prompt tells the interpreter to execute the line of Ruby code 
+	  contained in single quotes.
+	Semicolons can be used to separate lines
+	Typically you will place your Ruby code in a file, with a .rb 
+		extension. 
+		E.g., put the previous code in the rile hello.rb, and tell the 
+			interpreter to execute it using
+			ruby hello.rb
+
+IRB : Interactive Ruby Shell
+	* Allows you to execute Ruby code from command prompt:
+	* REPL: Read, Execute, Print, Loop
+	* Very useful for debugging
+	* Type: irb
+
+Can invoke IRB from root of a Rails app directory via rails console
+	* Rails environment is loaded when you do this
+	* Can directly manipulate Rails app from the command line
+	* Very useful and common way to debug
+	
+Language Features
+	* Multi-paradigm programming language
+		- Scripting : Can be used to write scripts that automate the 
+		    execution of tasks within some environment
+		- Imperative (procedure-oriented) : Traditional control 
+		    structures exist within
+		- Object-oriented : Everything in Ruby is an object, derived 
+		    from Object class
+		- Functional programming : Computation proceeds via the eval of 
+		    functions that depend only on their input, not the program state
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
