@@ -103,10 +103,62 @@ HTTP Sessions
 			- response could be requested resource, error message, or 
 				other info
 		
+Lecture 3 : HTTP Requests
+=========================
+Client side consists of 3 parts: Request line, header, message body
 
-
-
-
+Request line identifies the resource along with desired action that 
+	should be applied to it
+	The resource is typically identified by a Universal resource 
+		Identifier (URI)
+	Note : A Uniform Resource Locator is a specific type of URL
+		HEAD : response the resource would supply to GET request, but 
+			without response body
+		GET : return representation of resource
+		POST : submit data to resource, where data is supplied in body 
+			of request
+			Either creates or updates a resource
+		PUT : submit representation of resource
+		DELETE
+		TRACE, OPTIONS, CONNECT, PATCH
+	
+	HEAD, GET, OPTIONS, TRACE are safe methods : No side effects on 
+		server
+		* Information retrieval
+		* Should not change state
+		* If GET is safely implemented, can make arbitrary GET requests 
+			without worry
+			- Can cache request and save a lot of computation
+		
+	POST, PUT, DELETE may cause side effects on server - considered not 
+		safe
+		However, PUT and DELETE methods should be idempotent
+			- Multiple identical requests should have the same effect as 
+				a single request
+			- Safe methods are also idempotent
+		
+Headers : Primary part of HTTP request
+	Contains parameters of request
+	Header fields start with field name, colon, then field value
+		Ex: 
+			Accept: text/plain
+		eX: languages acceptable to client
+			Accept-Language: en-US
+	Field names and values may be any app-specific strings
+	Core set of fields is standardized by Internet Engineering Task 
+		Force (IETF)
+	HTTP message header must be separated from message body by blank 
+		line
+	
+Message body is optional
+	Typically includes user-entered data/ files being uploaded to server
+	D3efines various characteristics of data
+	May contain number of fields
+	Usually header liens in message that describe body
+	
+	Ex: Content-Type: specifies the MIME-type of the data in message 
+		body
+	Ex: Content-Length : specifies # bytes
 
 
 
