@@ -1,0 +1,135 @@
+Module 5 : Middleware
+---------------------
+
+What is middleware?
+HTTP - Introduction
+HTTP - Request
+HTTP - Response
+Model-View-Controller Design Pattern
+Rails Controllers - Request Handling
+Rails Controllers - Response
+MVC Implementation in Rails
+Blog App - Iteration 4
+
+Lecture 1 : What is Middleware?
+===============================
+
+The "meat" of a web app
+Middleware is the "software glue" between the OS and applications on 
+	each side of a client-server architecture
+	* Provides service to apps not available from the underlying OS
+	* Allows multiple processes running on different machines to 
+		interact
+	* We won't dig too deeply, but we'll focus on how MVC is implemented 
+		on top of it
+	
+In Rails, middleware stack, called Rack, is automatically provided.
+	Rack provides unified, simple interface that allows apps to talk to 
+		web servers
+		* Mongrel, Thin, Phusion, Apache
+		* Handles HTTP requests and responses
+		* Used to group and organise modules, written in Ruby, specify 
+			dependencies between them
+		
+Other Ruby frameworks, e.g. Sinatra, are also built on top of Rack
+rails server
+	* a Rack::Server object is created and attached to the web server, 
+		middleware components are loaded
+	* Rack::Server#start method starts the web server, listens for HTTP 
+		requests
+
+Lecture 2 : HTTP Introduction
+=============================
+
+HTTP is the foundation for data comm on the Web
+Involves request/response interactions
+
+HTTP is an application layer protocol used to deliver resources in 
+	distributed hypermedia info systems
+	* Initiates activities inplemented over the middleware
+	* Response typically returns resources to the browser
+	* Vital to understand for building and debugging web apps
+	
+HTTP - Resources
+Resources delivered typically include HTML, CSS, hypermedia, and scripts
+	Hypertext - text displayed on a computer (or other device) 
+		containing references to other hypertext
+		* User can immediately access, usually via mouse click
+	Hypermedia - Logical extension of hypertext to graphics/audio/video
+	Hyperlinks - Define a structure over the Web
+		* Google exploits this structure when determining relevance
+	Scripts - Code that can be executed on the client side 
+		* Typically JavaScript
+		* Led to a lot of security exploits
+		
+HTTP - Background
+	HTTP protocol is extremely lightweight and simple - hence its 
+		success
+	With HTTP/0.9 (first protocol) you could only issue GET request, 
+		i.e., asking server for a resource
+		* The server could only return HTML
+	Ex: GET /welcome.html
+		* Hopefully the server returns contents of requested file, your 
+			browser would render it
+	HTTP/1.0 extended it to include request headers along with 
+		additional request methods (DELETE, POST, etc.)
+	HTTP/1.1 - Faster response, allowed multiple transactions over 
+		single, persistent connection
+		* Faster response and bandwidth savings via cache support
+		* Faster for dynamically-generated content
+		* Efficient use of IP addresses
+		* Support for proxies
+		
+HTTP - Basics
+	Always been a stateless protocol : Does not require server to retain 
+		info between client requests
+	Each client request is executed independently, w/o knowledge of prev 
+		requests
+	Hard for web apps to respond intelligently to user input
+		- i.e., to create interactivity
+	Cookies, sessions, URL encoded parameters and a few other 
+		technologies have been introduced to address this issue
+		* Allowed for emergence of Web 2.0 and 3.0 apps
+		
+HTTP Sessions
+	HTTP client (browser) establishes TCP connection to a port on a host 
+		server (typically port 80), and initiates request
+		* May first involve using a DNS server in order to obtain an IP 
+			address
+			- Translates URL to particular IP address
+		* HTTP server listening on port waits for request message
+		* Processes request, sends back status line ("HTTP/1.1 200 OK"), 
+			along with a response
+			- response could be requested resource, error message, or 
+				other info
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
