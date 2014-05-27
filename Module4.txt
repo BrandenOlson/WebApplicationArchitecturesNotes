@@ -128,10 +128,78 @@ Inheritance
 	Within a class, keyword include to mixin a module
 		* Makes all methods defined in that module a part of the class that includes the module
 
+Lecture 3 : Objects and Variables
+=================================
 
+Everything is an object. Object class is parent class.
+	Its methods are available to all objects
+Syntax is sensitive to capitalization.
 
+Variables: No variable declarations (types). An appropriate variable is created for your literal	
 
+All assignments are done by reference in Ruby. (Different than C++)
+Ruby supports parallel assignment
 
+Simple naming conventions to denote scope of variables
+	name - local variable
+	@name - instance variable / field
+	@@name - class variable
+	$Name - global variable (typically capitalized)
+	
+	@ and $ sigils enhance readability b/c the programmer can easily identify the roles of each var
+	
+	Local variables must begin with lowercase letter
+		Use underscores, not CamelCase
+		
+	Constants: any name that starts with an uppercase letter
+		* Classes and modules are treated as constants
+		* Begin w/ uppercase, camelCase
+
+Lecture 4 : Strings, Regex, Symbols
+===================================
+
+Strings are created using single or double quotes
+Double quoted strings: 
+	"360 degrees = #{2*Math::PI} radians"
+	* String interpolation
+	
+Single backquotes : string will be executed as a command in underlying OS
+	* `date`
+	
+Strings are mutable
+	String class contains a number of methods used to manipulate strings
+		* name.length
+		* name[6]
+		* name[6..14]
+		* name.encoding <Encoding:UTF-8>
+		
+Regular expression class : Regexp
+	* Provides concise, flexible means for matching strings of text
+	* /pattern/modifiers
+		- "pattern" is regex itself
+		- "modifiers" are series of characters indicating various options
+		- Syntax is borrowed from Perl (same as most langs)
+	* To test: Use the =~ operator
+		- Returns the char position of start of match, or nil if no match
+	* Ruby documentation explains them
+	* Commonly used to validate emails, phone numbers, user input
+	
+	Ex: email
+		/\A[\w\._%-]+@[\w\.-]+\.[a-zA-Z]{2,4}\z/
+
+Symbols
+	* Closely related to strings
+	* Nonmutable
+	* Ruby interpreter maintains a symbol table where it stores the names of all classes, methods, and variables
+	* Can add your own symbols to this table. 
+		Ex: attr_reader :row, :col
+	* Represent names and strings, exist in memory only once during a Ruby session
+	* Big space advantage
+	
+Using a string vs symbol
+	* If the contents of the object are important (need to manipulate), use string
+	* If the identity is important, (no desire to manipulate), use symbol
+	
 
 
 
