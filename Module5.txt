@@ -160,9 +160,92 @@ Message body is optional
 		body
 	Ex: Content-Length : specifies # bytes
 
+Lecture 4 : HTTP - Response
+===========================
 
+Response message is similar to request message.
+	* Response line, header, message body
+	* After delivering response, server closes connection (0.9 and 1.0)
+	* With HTTP 1.1, a persistent connection is assumed by default
+	
+Response line : First line of resposne provided by serveer (status line)
+	* Status line has
+		- HTTP version
+		- Response status code
+		- English reason phrase describing status code
+		
+Status codes belong to five categorites
+	* 1xx - Provisional response
+		* Requires the requestor to take additional action to continue
+			- 100, continue status code: requester should cont with the requeset
+			- 101 : Switching protocol status code (e.g., to HTTPS)
+	* 2xx - Successful
+	* 3xx - Redirected
+		* Further action is needed to fulfill request
+	* 4xx - Request Error : There was probably an error in requset, server could not process it
+	* 5xx - Server Error : server had internal error when trying to process request
+	* Complete list can be found in RFC 2616, official HTTP 1.1 spec
+	
+Header
+	Header fields in response allow server to relay additional info about response
+		Same format as in request
+		Ex: Accept-Ranges, Age, Proxy-Authenticate
+		
+Message Body
+	Message body must also be preceded by blank line
+	Response to HEAD request does not include body, all other responses do
+		Could be zero length
+	Actual HTML is included
+	
+HTTPS - HTTP Secure protocol
+	* Combo of HTTP and SSL/TLS protocols
+	* Makes use of public key infrastructure
+	* HTTPS enhances HTTP by providing encrypted communication and secure web server identification
+	* Often used for processing payments in web apps, or handling sensitive transactions
+	* Trust is based on major certificate authorities
+		- e.g., VeriSign/Microsoft/etc.
+		- Tells browser whom it should trust
+	* URLs begin with "https://" and use 443 by default
+	
+Lecture 5 : MVC Design Pattern
+==============================
 
-
+Early web apps did not have much organization on server side
+	* Static web pages
+	* No separation of data from presentation
+	* Server-side scripts became more complicated, apps were hard to maintain
+	
+MVC architectural design pattern
+	* Implemented over middleware
+	* Used in many web app frameworks
+	* Decouples data (model) and presentation (view)
+	* Controller handles requests, coordinates between model and view
+	* More robust apps, easier to maintain
+	
+MVC pattern is a collection of design patterns
+	* Model: Domain-specific represntation of data over which app operaes
+		- Domain logic adds "meaning" to raw data
+		- A database often stores data
+	* View: Renders the model in a view suitable for interaction
+		- Via user interface
+		- Multiple views can be created for a single model
+	* Controller: Mediates between model and view
+	
+Different varities of MVC, control flow is generally:
+	* User interacts with interface (pressing a button, etc.)
+	* Controller handles input event from user interface
+		- Registered handler, callback
+		- Converts event into appropriate user action, understandable for model
+	* Controlelr notifies model of action
+		- Possibly resulting in change of state, e.g. updating account info
+	* View queries model to generate appropriate user interface
+		- Gets its own data from model
+		- In some implementations, controller issues an instruction to view to render itself
+			i.e., View is automatically notified by model of changes in state
+				* Observer design pattern
+	* User interface waits for further user interactions, repeat
+	
+	
 
 
 
