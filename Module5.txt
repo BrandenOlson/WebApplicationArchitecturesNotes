@@ -177,31 +177,38 @@ Response line : First line of resposne provided by serveer (status line)
 Status codes belong to five categorites
 	* 1xx - Provisional response
 		* Requires the requestor to take additional action to continue
-			- 100, continue status code: requester should cont with the requeset
+			- 100, continue status code: requester should cont with the 
+				requeset
 			- 101 : Switching protocol status code (e.g., to HTTPS)
 	* 2xx - Successful
 	* 3xx - Redirected
 		* Further action is needed to fulfill request
-	* 4xx - Request Error : There was probably an error in requset, server could not process it
-	* 5xx - Server Error : server had internal error when trying to process request
+	* 4xx - Request Error : There was probably an error in requset, 
+		server could not process it
+	* 5xx - Server Error : server had internal error when trying to 
+		process request
 	* Complete list can be found in RFC 2616, official HTTP 1.1 spec
 	
 Header
-	Header fields in response allow server to relay additional info about response
+	Header fields in response allow server to relay additional info 
+		about response
 		Same format as in request
 		Ex: Accept-Ranges, Age, Proxy-Authenticate
 		
 Message Body
 	Message body must also be preceded by blank line
-	Response to HEAD request does not include body, all other responses do
+	Response to HEAD request does not include body, all other responses 
+		do
 		Could be zero length
 	Actual HTML is included
 	
 HTTPS - HTTP Secure protocol
 	* Combo of HTTP and SSL/TLS protocols
 	* Makes use of public key infrastructure
-	* HTTPS enhances HTTP by providing encrypted communication and secure web server identification
-	* Often used for processing payments in web apps, or handling sensitive transactions
+	* HTTPS enhances HTTP by providing encrypted communication and 
+		secure web server identification
+	* Often used for processing payments in web apps, or handling 
+		sensitive transactions
 	* Trust is based on major certificate authorities
 		- e.g., VeriSign/Microsoft/etc.
 		- Tells browser whom it should trust
@@ -213,7 +220,8 @@ Lecture 5 : MVC Design Pattern
 Early web apps did not have much organization on server side
 	* Static web pages
 	* No separation of data from presentation
-	* Server-side scripts became more complicated, apps were hard to maintain
+	* Server-side scripts became more complicated, apps were hard to 
+		maintain
 	
 MVC architectural design pattern
 	* Implemented over middleware
@@ -223,7 +231,8 @@ MVC architectural design pattern
 	* More robust apps, easier to maintain
 	
 MVC pattern is a collection of design patterns
-	* Model: Domain-specific represntation of data over which app operaes
+	* Model: Domain-specific represntation of data over which app 
+		operaes
 		- Domain logic adds "meaning" to raw data
 		- A database often stores data
 	* View: Renders the model in a view suitable for interaction
@@ -235,17 +244,84 @@ Different varities of MVC, control flow is generally:
 	* User interacts with interface (pressing a button, etc.)
 	* Controller handles input event from user interface
 		- Registered handler, callback
-		- Converts event into appropriate user action, understandable for model
+		- Converts event into appropriate user action, understandable 
+			for model
 	* Controlelr notifies model of action
-		- Possibly resulting in change of state, e.g. updating account info
+		- Possibly resulting in change of state, e.g. updating account 
+			info
 	* View queries model to generate appropriate user interface
 		- Gets its own data from model
-		- In some implementations, controller issues an instruction to view to render itself
-			i.e., View is automatically notified by model of changes in state
+		- In some implementations, controller issues an instruction to 
+			view to render itself
+			i.e., View is automatically notified by model of changes in 
+				state
 				* Observer design pattern
 	* User interface waits for further user interactions, repeat
 	
+Lecture 6 : Rails Controllers -- Request Handling
+=================================================
+
+Models are supported by Ruby ActiveRecord module in Rails
+Views and controllers in Rails are supported by Action Pack:
+	* ActionDispatch, ActionController, ActionView
+Controllers are heart of Rails app
+	* When user connects to Rails app, they ask app to execute a 
+		controller action
+		- How does Rails know what to do?
+		
+Dispatcher
+	When HTTP request is made to Rails app, ActionDispatch module maps 
+		that request to particular controllera ction
+	Requests are mapped to controller actions via the routes defined in 
+		./config/routes.rb
+	To connect a request to a controller action, you add a route to 
+		./config/routes.rb
 	
+	Ex: Adding the following to ./config/routes.rb:
+		get 'products/:id' => 'catalog#view'
+			* Create a route that takes get request issued for products 
+				with particular id, and maps it to a catalog controller 
+					with view method
+			* Will map a GET request that uses the URL 
+				http://localhost:3000/products/10 to view method in 
+					CatalogController class, assigns the value 10 to 
+						params[:id] hash available to all methods in the 
+							class
+			
+RESTful Controllers
+	By default, Rails controllers are RESTful -- and therefore use 
+		resource routing
+	REST stands for Representational State Transfer
+	REST : clients should communicate w/ servers through stateless 
+		connections
+		* Long term state is kept on the server side by maintaining a 
+			set of resources
+			- posts and comments in our case
+		* Client can access these (CRUD) through highly limited but 
+			uniform interface
+			- set of URLs in our case
+		* Computation proceeds by identifying resource and the CRUD op 
+			to perform
+		
+	REST-based web app can contrast with RPC-basaed web app
+	In RPC apps, clients send requests to servwers asking for a 
+		procedure w/ supplied params
+		* Server must advertise the services it offers
+		* SOAP is a protocol from Microsoft that supports this
+	REST assumes a simple set of verbs (controller actions/methods) that 
+		can operate over a rich set of nouns (resources)
+	RPC allows for arbitrary complexity on serer side
+	
+	REST imposes constraints that make web apps easy to maintain
+	Programmable Web treates WWW as vast collection of addressable 
+		resources
+		* Greatly facilitated by REST
+	
+Resourceful Routes
+	The statement in ./config/routes.rb says resources :posts
+		* Produces seven different routes in your app, all mapping to 
+			methods in PostsController class
+		* rake routes shows them for you
 
 
 
