@@ -1,0 +1,490 @@
+Module 6 : Presentation/User Interface
+======================================
+
+* Introduction and background
+* HTML basic syntax
+* HTML document structure
+* HTML forms
+* Dynamic content
+* CSS
+* JavaScript and jQuery
+* Ajax - asynchronous interactivity
+* Blog App - Iteration 5
+
+Lecture 1 : Intro
+=================
+
+Client tier and web tier 
+	* Browser side, web server preparing stuff for browser
+	
+Presentation tier produces what users see and interact with, via browser
+	More than just hyperlinks
+	"Stickiness"/usability can make or break a business on the internet
+	High-quality website has:
+		- Visually appealing layout
+			* Graphic design courses
+		- Intuitive navigation structure
+			* Principle of least surprise
+			* Descriptive buttons
+	Beyond scope to dig into detail in this course
+	Let others experiment with website
+	Designing layouts from scratch requires graphic design skills
+		* Team might hire a graphic designer
+	Fundamental design principles
+		* Proportion
+		* Wireframing
+		
+Wireframing
+	Partition general areas
+
+Structure and Navigation
+	Hierarchy tree
+	Helps intuitive design
+	Higher up <=> More important
+	
+Presentation Tier
+	Complexity has grown significantly
+	Web apps look more like desktop apps
+		* cookies
+		* validations
+	
+HTML - language that specifies web pages
+CSS - language that styles web pages
+JavaScript - adds behavior to web pages
+	
+Lecture 2 : Basic HTML Syntax
+=============================
+
+HTML history
+	HTML developed by Berners-Lee at CERN in early 90's
+	W3.org - specification for HTML
+	HTML5 incorporates video playback, etc.
+	
+Semantic HTML
+	Separation of content and presentation
+		* Semantics of a document should be separated from how it is 
+			presented
+		* Same content can be rendered differently depending upon needs 
+			of user
+			- As text, as braille, etc.
+		* Change in one place how a recurrent item in document is styled
+	Entire design of website can be redesigned with same content
+	By capturing meaning, intelligent machine processing can be 
+		supported
+		* E.g., give me all emphasized words
+
+Declarative Programming
+	Markup languages are declarative
+	Program control flow is not specified
+	Specify what, not how
+	Specify what should appear on webpage, but not how it looks
+	
+	<div>
+		<h1>Introduction</h1>
+	</div>
+	
+Elements, Tags, Attributes
+	Each individual component in HTML doc is represented by an element
+	HTML document is structured as a tree of elements
+	Element consists of:
+		* start tag
+		* attributes
+		* end
+		* content may appear between start and end tag
+	Elements may be nested
+	Parent-child relationship
+	Listing of all HTML tags found at www.w3schools.com/tags/
+	
+Attributes
+	Give elements additional meaning, context
+	name-value pairs inside start tag
+		* value in quotes, separated by equal sign
+		* Ex: <div id="main-panel" class="modern">
+			- id, class are names, "main-panel", "modern" are values
+		* All HTML elements support id attribtue
+			- Must be unique within a doc
+		* Class can be applied to a collection of elements
+
+Anchor <a>
+	Used to create hyperlinks
+	Ex: <a href="http://www.amazon.com">Amazon</a>
+	
+	href attribute used to specify hypertext reference
+	
+	Event attributes may be attached to an anchor element
+		* May include window, form, keyboard, mouse, media events
+	
+	Ex: <a href="http://www.amazon.com" onmouseover="notice.js">Amazon
+		</a>
+		* Runs javascript code when mouse hovers over link
+		* Usually defined in separate JS file
+		
+Styling HTML
+	Earlier versions, number of formatting elements found their way 
+		into spec
+	Current spec : Don't do this, use CSS
+	These tags are "Not supported in HTML5"
+	
+Styling rules (CSS) and/or behaviors (JavaScript) are attached to 
+	particular HTML elements according to id and/or class
+
+Lecture 3 : Document Structure
+===============================
+	
+DOCTYPE declaration must be the first thing that appears in HTML doc
+	Not an HTML tag, lets browser know what version of HTML page is 
+		written in
+	For HTML5, use <!DOCTYPE html>
+	Older versions of HTML will have more info:
+		EX: HTML 4.01
+			<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+				"http://www.w3.org/TR/html4/scritc.dtd">
+	
+<html> tag marks opening of outermost element
+	* Root of document
+		* Head and body are children
+	
+<head> element contains head element
+	* <title> required
+	* <link> used to read in CSS and JavaScript files
+	* Will look on the web server that provided the page, under public 
+		section
+		- Can be an entire URL specified
+	* URL may be
+		- absolute: pointing to another website
+		- relative: pointing to a file within the website
+	* <script> used to define a client-side script, typically JavaScript
+		<script>
+			function message() {
+				document.write("Hello World!")
+			}
+		</script>
+		- Better: <script src="myscripts.js"></script>
+			* URL may be absolute or relative
+	* <meta> used to provide metadata within HTML doc
+		- Metadata is data about data - machine parsable, not displayed 
+			on page
+		- Can be used by browsers (when to refresh webpage)
+		- Keywords for search engines
+		Ex:
+			<head>
+				<meta charset="UTF-8">
+				<meta name="description" content="My MOOC">
+				<meta name="keywords" content="MOOC">
+			</head>
+			
+<body> contains HTML elements to be rendered in the browser
+	Every body element is either block-level or text-level (inline)
+		- Block-level elems define major structure of webpage
+			* headings, paragraphs, div, etc.
+			* Always produce a new line in the doc
+		- Inline elems define minor structure
+			* bold/emphasized text
+			* do not produce new line
+	
+Lecture 4 : HTML Forms
+======================
+
+We have learned how to build static websites
+We need interactivity -- forms do this
+Allows collecting info from users
+Using HTML form element
+Info collected via broswer, submitted to web server fo rprocessing
+
+HTML form is a section of a doc that can contain normal markup as well 
+	as controls
+	* Checkboxes, radio buttons, drop-down lists
+	* Users complete a form by modifying its controls
+	* When form is submitted, data is first processed by user agent 
+		(part of the browser)
+	* Then it is sent to server-side
+
+<form action="http://www.example.com/log" method="get">
+	<!-- form controls and other HTML markup -->
+	<input type="submit" value="Log In">
+</form>
+	* action specifies URL of processing agent on server-side
+	* method scifies HTTP request method
+		- User agent must support GET and POST
+		
+GET Request
+	Form data is seaprated from URL by a ?
+	Each name/value pair is separated by &
+	each name separated from value by =
+	Ex: www.example.com/?firstname=Carol&lastname=Codegood
+	
+	GET method should be used when form is idempotent
+		* e.g., searching a database
+		* Should NOT send sensitive data using GET (seen in URL)
+		* Should NOT use if large amount of form data, or includes 
+			binary data
+		* Cannot be used if form contains file upload
+		
+POST Request
+	If server-side processing causes side effects, use POST
+		* Modifying a DB, subscription to service, etc.
+	If form data is sensitive, should switch to HTTPS protocol
+	
+Form Submission Process
+	User agent running in browser identifies successful controls
+		* builds a form data set - sequence of control-name/
+			current-value pairs for successful controls
+		* form data is encoded by user agent according to content type 
+			specified in enctype attr of form element
+			- application/x-www-form-urlencoded is default
+			- multipart/form-data
+			- text/plain
+	User agent submits encoded data set to processing agent running on 
+		server side
+	
+Form Controls
+	Specified using an input or select element that must appear in 
+		content section of form element
+	Name of control is specified using name attr
+	Control has initial value and a current value - both are char 
+		strings
+	Available form controls include text, date, buttons, checkboxes, 
+		radio buttons, select boxes, file select boxes, hidden 
+			controls, etc.
+		* www.w3schools.com has complete list
+		
+Button controls are specified using button element or input element
+	type attr has 3 possible values
+		1) submit
+		2) reset - causes form to be reset -- all controls are assigned 
+			init values
+		3) button - creates push button -- associated script is executed
+	with input, type attr may be specified as iamge
+		* Creates graphical submit button
+
+Button controls have many attrs that support event-driven programming
+	Supports interactivity in browser
+		* Click button, event processed, somethign happens in window
+	Some of events attributes include
+		onblur, onfocus, onclick, onmouseover, onkeypress, onkeydown
+		* Tells user they can interact
+	Value supplied is the script that reacts to event
+	
+Checkboxes and radio buttons use the input element
+	On/off switches toggled by user
+	Several of these control can share same control name
+	Switch is "on" when element's checked attr is set
+	When form is submitted, only "on" controls are treated as successful
+	If several radio button share same name, they are treated as 
+		mutually exclusive
+	Multiple checkboxes within same name may be simultaneously allowed
+	
+Text input and file select
+	Text controls
+		- text : creates single line text input control
+		- textarea : creates a multiline text input control
+	File select control
+	Password input control : uses input element
+		user input is shown in browser as dots or asterisks
+		
+select boxes specified using select element
+	Each choice offered by menu is represented by an option element
+		Each select elem must contain >= 1 option element
+	Optgroup elem allows several of menu choices to be grouped together
+		may not be nested in general
+	
+** Partial template
+	render 'form'
+	form is found in _form.html.erb
+	Used for both new and edit
+	
+Lecture 5 : Dynamic Content, Templates, and layouts
+===================================================
+
+Controller and view are tightly coupled
+In Rails, controller makes every instance variable available to 
+	associated view files
+	All posts are retrievedin PostsController#index method, stored in 
+		@posts array
+	
+Dynamic content is generated using templates
+	Most common templating framework is Embedded Ruby (ERb)
+	ERb is a filter that takes a .html.erb template file as input and 
+		transforms it into HTML output file
+		* Normal HTML content is passed through filter w/o modification
+		* Content between <%= and %> is interpreted as Ruby code and 
+			executed
+			- Results substituted back into file as string in place of 
+				the <%= ... %> string
+		* Content between <% and %> is interpreted as Ruby and executed
+			- Results are NOT substituted back into output file
+		
+Proper Use of ERb
+	Although ERb allows insertion of Ruby code, use it sparingly!
+	Application logic should not be in view
+	HTML code specifies structure
+	Ruby code provides dynamic info specific to particular resources
+	Application-level functionality and business logic should never be 
+		found in ERb templates
+	Numerous Rails helper methods for generating HTML elements and 
+		formatting data in view
+	
+Layouts
+	To generate final HTML file for browser, a layout file is invoked, 
+		passing template to it as block
+	By default app/views/layouts/application.html.erb is used
+		* Automatically created when create new Rails app
+	Advantage of layouts: By editing one file, we can change the look 
+		and feel of entire site
+	Different layouts for different parts :
+		* Create layout file with same name as controller you want to 
+			associate it with
+			- Place it in layouts folder
+			- Ex: app/views/layouts/posts.html.erb
+			
+HTML file
+Created in response to an HTTP GET request
+	| index.html.erb |    |application.html.erb |
+	|                |--->|                     |
+	|  @posts        |    | <%= yield %>        |
+                          
+                          |        |
+                      --->| Filter |	
+                          |        |
+                          	
+	                  index.html |         |
+	                  ---------->| Browser |
+	                             |         |
+	
+Helper Methods
+	Intended to be used in ERb templates
+	We saw a few in application.html.erb file
+		stylesheet_link_tag() - generates HTML <link> tags to app's CSS 
+			stylesheets
+		javascript_include_tag() - ditto, but for app's scripts
+		csrf_meta_tags() - prevents cross-site scripting attacks
+	
+api.rubyonrails.org/classes/ActionView/helpers.html
+	* Rails guide : ActionView
+
+Lecture 6 : CSS
+===============
+
+Displaying a Document
+	* Browser : fetch css and script files from external sites
+	* HTML is parsed to create internal document tree
+	* DOM (Document Object Model) -> render page
+	
+Cascading Style Sheets (CSS) is a language for specifying presentation 
+	semantics of HTML doc
+	* styles HTML in order to apply graphic design to website
+	* Creat rules that specify how HTML elements should appear
+	* SASS (syntactically Awesome Stylesheets)
+		- http://sass-lang.com/
+	* csszengarden.com
+
+CSS Rules
+	selector { declarations }
+	where
+		* selector -- specifies HTML elements the rule will apply to
+		* declaration -- semicolon-separated list of property:value 
+			paris
+			- Ex: h1, h2 {
+					font-weight:bold;
+					font-family:arial;
+					color:black
+				}
+	Invalid CSS rules are simply ignored
+
+	class attribute can be applied to almost any HTML element
+		Class selector:
+			div.main {
+				...
+				...
+			}
+			
+			or more generally
+			
+			.main {
+				...
+			}
+			
+Type selector : applies to elements of a given type
+Class selector
+id selector : applies to elements with a given id
+	* #chapter1 { text-align:center }
+Additional selectors can be found at
+	w3schools.com/cssref/css_selectors.asp
+	
+Pseudoclasses
+	Allow for selection on info that lies outside document tree
+	E.g., visited links
+	Ex: a:link {color:#FF0000;}
+	
+The Box Model
+	CSS treats every element as a box, allows you to specify following 
+		properties associated w/ formatting of the box
+		* Padding, margin, border
+	Every box has a border, possibly invisible
+		* border-style, border-width
+	Margin and padding props allow you to control whitespace between 
+		elements
+		* Allow for more pleasing visual designs
+	
+CSS can be used to control positioning of boxes on page
+	position property allows you to control positions of boxes
+	Before, tables, iframe elements did this
+	w3schools.com/css/css_positioning.asp
+	w3schools.com/cssref/pr_class_position.asp
+	
+If change should occur for every single page:
+	Add to application.css
+If everything was build via scaffold:
+	Add to scaffold.css
+If it should only apply to specific model
+	Add to that model's css file
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
