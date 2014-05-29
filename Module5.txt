@@ -323,6 +323,99 @@ Resourceful Routes
 			methods in PostsController class
 		* rake routes shows them for you
 
+Lecture 7 : Rails Controllers - Response
+----------------------------------------
+
+Dispatcher routes a request to particular controller action(method)
+HTTP GET request http://localhost:3000/posts/1 will route to show method 
+	in PostsController class passing params[:id] w/ value 1 to 
+		controller
+	The show method will use ActiveRecord#find method to retrieve post 
+		with id=1 from DB, and assign it to @post
+	Finally, controller will pass @post to view in 
+		views/posts/show.html.erb, creates HTML for browser
+	
+Filters
+	PostsController#show method is defined as follows:
+		def show
+		end
+	desired post is actually retrieved from DB using filter called 
+		set_post
+	Filters allow controllers to run shared pre- and post-processing 
+		code over their methods
+	in posts_controller.rb, we see the line
+		before_action :set_post, only: [:show, :edit, :update, :destroy]
+	private 
+			def set_post
+				@post = Post.find(params[:id])
+			end
+
+Sessions
+	State should be persistent in DB
+	Posts and comments are persisted in DB
+	When a user connects to Rails app, a session is created
+		Ex: session[:current_user] = user.id
+			* Hash structure that persists across requests
+			* Can be accessed by controllers
+	Flash hash is part of session cleared w/ each request
+		Ex: flash[:notice] = 'Post was successfully created.'
+	
+Response - Rendering HTML or JSON
+	The request http://localhost:3000/posts/1 assumes HTML will be 
+		returned
+	Could have also typed http://localhost:3000/posts/1.html
+	Rails can also return other formats, such as JSON
+
+Redirects
+	Rails may also respond to HTTP request using redirect_to method
+	Tells browser to send new request for different URL
+		Ex: redirect_to 'www.example.com'
+	Rails has shortcuts for URLs w/in your app
+		Ex: redirect_to posts_url will redirect to index method in 
+			PostsController
+		Ex: You can assign flash message as part of redirect:
+			- redirect_to @post, notice: 'Post was successfully 
+				created.'
+
+In rails console
+	app.posts_url
+	app.posts_path
+	
+Lecture 8 : MVC Implementation in Rails
+=======================================
+
+Model: ActiveRecord class implements object-relational mappings
+View: views and controllers are bundled in Action Pack
+Controller: ActionController class is core of web request in Rails
+	
+
+MVC interactions in Rails
+	1) Browser sends an http request to web server (link clicked)
+		* HTTP GET request
+		* http://localhost:3000/posts
+	2) Web server processes request, determines relevant route, 
+		dispatches request to corresponding controller method
+		* resources :posts // Linked to index method in posts controller
+		* PostController::index
+	3) Controller asks model for all info needed to complete request
+		* Wants all posts => @posts = Post.all
+	4) Model collects requests info and returns it to controller
+		* Post array
+	5) Controller gives appropriate info to view, requesting particular 
+		format
+		* HTML by default
+		* @posts
+	6) View renders information in specified format
+		* index.html.erb to controller
+	7) Controller assembles total page's html and gives it to web server
+		* application.html.erb + index.html to web server
+	8) Web server returns page to browser
+		* text/html (response) to browser
+
+
+
+
+
 
 
 
