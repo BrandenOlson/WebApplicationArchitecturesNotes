@@ -173,16 +173,3 @@ remote git repository: Want to push changes for others to grab and use
 		most recent branch and makes it master
 		clone <remote>: Creates repo initially on system, then you can 
 			use pull commands to pull remote git repo onto machine
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
-	

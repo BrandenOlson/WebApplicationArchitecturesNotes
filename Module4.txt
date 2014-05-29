@@ -321,30 +321,3 @@ Iterators
 	
 ' <%= ' generates HTML code that is inserted at that line
 No equal sign is just a control structure
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
-
-
-
-
-
-

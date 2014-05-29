@@ -139,12 +139,15 @@ Lecture 4 : Associations
 
 We need to ensure that every comment created is linked to a post
 
-We made this connection in the DB because in comment, we have a post_id stored (foreign key)
-We need to add associations to the models. Each post needs to know comments it has,
+We made this connection in the DB because in comment, we have a post_id 
+	stored (foreign key)
+We need to add associations to the models. Each post needs to know 
+	comments it has,
 	each comment needs to know which post it belongs to.
 	Many-to-one relationship between comments and posts
 	
-ActiveRecord module contains a set of class methods to ty objects toeghether
+ActiveRecord module contains a set of class methods to tie objects 
+	together
 	
 Relationship	Model w/ no foreign key		Model with foreign_key
 ------------------------------------------------------------------
@@ -165,14 +168,18 @@ In config/routes.rb
 Lecture 5: Validations
 ======================
 
-Data validation is the process of ensuring your web app operates on clean, correct, useful data
+Data validation is the process of ensuring your web app operates on 
+	clean, correct, useful data
 Ex: Ensure user provides valid email address, etc.
 Ex: Ensure inputs are same, e.g. phone numbers
 Ex: Ensure business rules are not being violated
-Most common web app security weakness is failure to validate client-side input
+Most common web app security weakness is failure to validate client-side 
+	input
 	* SQL injection, cross-site scripting, buffer overflow attacks
-	* SQL injection: entering SQL code into a form, code gets stored and executed in DB
-	* Buffer overflow: providing long input to overflow buffer and execute things in memory
+	* SQL injection: entering SQL code into a form, code gets stored and 
+		executed in DB
+	* Buffer overflow: providing long input to overflow buffer and 
+		execute things in memory
 	
 Data validations in web apps
 	Client-side: JavaScript, HTML5
@@ -181,27 +188,38 @@ Data validations in web apps
 	
 Client-side: Involves checking that HTML forms are filled out correctly
 	JavaScript, running in browser, has traditionally been us3ed.
-	HTML5 now has more specific input types that can be checked, along with required attribute
+	HTML5 now has more specific input types that can be checked, along 
+		with required attribute
 		* Not everyone has JavaScript enabled in browser
 	Works best when combined with server-side validations
 Server-side: checks made after an HTML form has been submitted
-	- Database (stored procedures) - database-dependent, so not portable. 
-	- Controller-level: You don't want to put too much logic in the controller
-	- Model-level - A good way to ensure that only valid data is stored in your databse, in a DB agnostic way
+	- Database (stored procedures) - database-dependent, so not 
+		portable. 
+	- Controller-level: You don't want to put too much logic in the 
+		controller
+	- Model-level - A good way to ensure that only valid data is stored 
+		in your databse, in a DB agnostic way
 	
 ActiveRecord Callbacks
-	Objects in an OO system have lifecycles: first created, can later be updated and destroyed
-	ActiveRecord objects have methods that can be called in order to ensure their integrity at various stages
+	Objects in an OO system have lifecycles: first created, can later be 
+		updated and destroyed
+	ActiveRecord objects have methods that can be called in order to 
+		ensure their integrity at various stages
 	Ex: Don't create a new user object if user already exists in DB
-	Ex: Ensure that all object's attributes are valid before saving to DB
+	Ex: Ensure that all object's attributes are valid before saving to 
+		DB
 	Ex: When destroying object, destroy all of its dependencies
 	
-	Callbacks are methods that get called at certain points in an ActiveRecord object's lifecycle
-		* Hooks into the lifecycle, allowing to trigger logic before/after state of object changes
+	Callbacks are methods that get called at certain points in an 
+		ActiveRecord object's lifecycle
+		* Hooks into the lifecycle, allowing to trigger logic before/
+			after state of object changes
 		
 ActiveRecord Validations
-	Are a type of ActiveRecord callback that can be used to ensure only valid data is stored
-	Create, save and update methods trigger validations, and will only allow a valid AR object
+	Are a type of ActiveRecord callback that can be used to ensure only 
+		valid data is stored
+	Create, save and update methods trigger validations, and will only 
+		allow a valid AR object
 	Defined in models
 	
 	Ex:
@@ -210,21 +228,3 @@ ActiveRecord Validations
 			validates_numericality_of :age, :only_integer => true
 			validates_confirmation_of :email
 			validates_length_of :password, :in => 8..20
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	

@@ -15,16 +15,21 @@ Web 1.0 Context
 Web 1.0 Applications
 	As apps became richer, server-side scripts gained complexity
 	Apps became difficult to maintain
-	Browser wars: Netscape vs. Microsoft -- led to more functionality on client side
-	Developers began creating more interactive apps. Required saving state
-	Improved performance --  client-side scripts, faster browsers, servers, web caching
+	Browser wars: Netscape vs. Microsoft -- led to more functionality on 
+		client side
+	Developers began creating more interactive apps. Required saving 
+		state
+	Improved performance --  client-side scripts, faster browsers, 
+		servers, web caching
 
 Web Applications
-	2.0 and 3.0 app architectures are better organized to deal with this new complexity
+	2.0 and 3.0 app architectures are better organized to deal with this 
+		new complexity
 	Server-side functionality is partitioned more intelligently
 	More capable browsers (no more "best viewed with internet explorer"
 		
-Web stack: Protocols, standards, technologies that exist throughout web app architecture
+Web stack: Protocols, standards, technologies that exist throughout web 
+	app architecture
 
 Web 2.0 Context
 	100,000,000 websites
@@ -35,7 +40,8 @@ Web 2.0 Context
 Web 3.0 Context
 	1 billion websites
 	2.5 billion users
-	Metadata: data about data - allows machines to better understand your data
+	Metadata: data about data - allows machines to better understand 
+		your data
 		Machine learning in web apps - recommendations, etc.
 	Huge percentage of earth's population use web and web apps
 	
@@ -53,7 +59,8 @@ Design pattern: description of interacting objects and classes to solve
 	general problem in a particular context
 	Abstract template that can be reapplied
 	Use to solve specific problems when building real systems
-	Communicate parts of a design (vernacular that software engineers use)
+	Communicate parts of a design (vernacular that software engineers 
+		use)
 	
 Client-server model
 	Distribute components of an app between client and server
@@ -62,7 +69,8 @@ Client-server model
 	
 n-Tier Architecture
 	Highly useful pattern 
-	Breaking a system into different pieces/tiers that can be physically separated
+	Breaking a system into different pieces/tiers that can be physically 
+		separated
 		Each tier has specific functionality
 		Only interacts with adjacent tiers through well-defined interface
 		Print server 2-tier - client and server
@@ -71,7 +79,8 @@ n-Tier Architecture
 	Additional tiers show up when functionality is partitioned
 	Advantages
 		Manage complexity
-		Tiers can be upgraded or replaced independently as requirements/technology change
+		Tiers can be upgraded or replaced independently as requirements/
+			technology change
 			New tier needs to use same interfaces as old one
 		Balance between innovation and standardization
 			Interface: standards
@@ -81,25 +90,30 @@ n-Tier Architecture
 
 3-Tier Architecture
 	Presentation tier: user interface
-	Application tier: Retrieves, modifies, deletes data in data tier, sends
+	Application tier: Retrieves, modifies, deletes data in data tier, 
+		sends
 		results to presentation tier.
 		Processes data
 	Data tier: source of data associated w/ app
 	
-	Modern web apps often deployed over the internet as a 3-tier architecture
+	Modern web apps often deployed over the internet as a 3-tier 
+		architecture
 		Pres. tier: Web browser
 		App tier: Web server/logic - retrieving info from DB
 		Data tier: Database
 		
 6-Tier Arch
 	App tier divided into two tiers:
-		Business logic tier- models business objects, eg. accounts, inventories, etc.
+		Business logic tier- models business objects, eg. accounts, 
+			inventories, etc.
 			Captures business rules and workflows
-		Data access tier - accessing data, passing to business logic tier 
+		Data access tier - accessing data, passing to business logic 
+			tier 
 			e.g. account balances, transactions, etc.
 	Pres divided into 2 tiers:
 		Client tier (browser)- user interface
-		Presentation logic tier: server-side scripts for generating web pages
+		Presentation logic tier: server-side scripts for generating web 
+			pages
 	Web tier: web server separated out into its own tier
 	Data tier
 	
@@ -119,24 +133,3 @@ OS-dependent suggestions
 VM available that contains a pre-built devel env.
 
 SQLite Database Browser - GUI
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

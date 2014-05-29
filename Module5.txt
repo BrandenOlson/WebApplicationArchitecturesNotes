@@ -411,29 +411,3 @@ MVC interactions in Rails
 		* application.html.erb + index.html to web server
 	8) Web server returns page to browser
 		* text/html (response) to browser
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
